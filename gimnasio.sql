@@ -1,13 +1,13 @@
 --Ejercicio B1
 
---B1.2
+--B1.1
 CREATE TABLE planes (
     id INTEGER GENERATED ALWAYS AS IDENTITY PRIMARY KEY,
     nombre VARCHAR(50) UNIQUE NOT NULL,
     precio_mensual NUMERIC(6,2) NOT NULL CHECK (precio_mensual >= 0)
 );
 
---B1.3
+--B1.2
 CREATE TABLE socios (
     id INTEGER GENERATED ALWAYS AS IDENTITY PRIMARY KEY,
     dni VARCHAR(9) UNIQUE NOT NULL,
@@ -17,7 +17,7 @@ CREATE TABLE socios (
     plan_id INTEGER NOT NULL REFERENCES planes(id)
 );
 
---B1.4
+--B1.3
 CREATE TABLE tarjetas (
     id INTEGER GENERATED ALWAYS AS IDENTITY PRIMARY KEY,
     codigo VARCHAR(20) UNIQUE NOT NULL,
@@ -25,7 +25,7 @@ CREATE TABLE tarjetas (
     socio_id INTEGER UNIQUE NOT NULL REFERENCES socios(id)
 );
 
---B1.5
+--B1.4
 CREATE TABLE monitores (
     id INTEGER GENERATED ALWAYS AS IDENTITY PRIMARY KEY,
     dni VARCHAR(9) UNIQUE NOT NULL,
@@ -35,7 +35,7 @@ CREATE TABLE monitores (
     especialidad VARCHAR(50)
 );
 
---B1.6
+--B1.5
 CREATE TABLE clases (
     id INTEGER GENERATED ALWAYS AS IDENTITY PRIMARY KEY,
     nombre VARCHAR(100) NOT NULL,
@@ -45,7 +45,7 @@ CREATE TABLE clases (
     monitor_id INTEGER NOT NULL REFERENCES monitores(id)
 );
 
---B1.7
+--B1.6
 CREATE TABLE reservas (
     id INTEGER GENERATED ALWAYS AS IDENTITY PRIMARY KEY,
     socio_id INTEGER NOT NULL REFERENCES socios(id),
@@ -54,14 +54,14 @@ CREATE TABLE reservas (
     UNIQUE (socio_id, clase_id)
 );
 
---B1.8
+--B1.7
 CREATE TABLE especialidades (
     id INTEGER GENERATED ALWAYS AS IDENTITY PRIMARY KEY,
     nombre VARCHAR(100) UNIQUE NOT NULL,
     descripcion TEXT
 );
 
---B1.9
+--B1.8
 CREATE TABLE monitor_especialidades (
     id INTEGER GENERATED ALWAYS AS IDENTITY PRIMARY KEY,
     monitor_id INTEGER NOT NULL REFERENCES monitores(id),
